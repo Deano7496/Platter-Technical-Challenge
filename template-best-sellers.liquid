@@ -1,0 +1,252 @@
+{% schema %}
+{
+  "name": "Best Sellers",
+  "settings": [
+    {
+      "type": "number",
+      "id": "products_to_show",
+      "label": "Number of products to show",
+      "default": 4,
+      "min": 1,
+      "max": 10
+    },
+    {
+      "type": "text",
+      "id": "collection_handle",
+      "label": "Collection Handle",
+      "default": "best-sellers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platter Best Sellers</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .product-image {
+      position: relative;
+    }
+
+    .product-image img.secondary {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-image:hover img.secondary {
+      opacity: 1;
+    }
+
+    .best-seller-badge {
+      position: absolute;
+      background-color: white; /* Semi-transparent red */
+      color: black;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .discount-badge {
+      position: absolute;
+      background-color: green; /* Semi-transparent red */
+      color: white;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .best-seller-badge {
+      top: 0.5rem;
+      left: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .discount-badge {
+      top: 0.5rem;
+      right: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .product-container {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: auto; /* For Firefox */
+      gap: 1rem; /* Add space between the product items */
+      padding-bottom: 2rem; /* Ensure space for the scrollbar */
+    }
+
+    .product-container::-webkit-scrollbar {
+      height: 12px;
+    }
+
+    .product-container::-webkit-scrollbar-track {
+      background: #f1f1f1; /* Color of the scrollbar track */
+    }
+
+    .product-container::-webkit-scrollbar-thumb {
+      background: #888; /* Color of the scrollbar */
+      border-radius: 10px; /* Rounded corners for the scrollbar */
+    }
+
+    .product-container::-webkit-scrollbar-thumb:hover {
+      background: #555; /* Color of the scrollbar when hovered */
+    }
+
+    .product-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: calc(100% / 4);
+      margin-right: 1rem; /* Add space between the product items */
+    }
+
+    .product-item:last-child {
+      margin-right: 0; /* Remove margin for the last item */
+    }
+
+    .product-item img {
+      border-radius: 8px; /* Add slight rounding to the images */
+    }
+
+    @media (max-width: 640px) {
+      .product-container {
+        display: grid;
+        padding: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        overflow-x: hidden;
+      }
+
+      .product-item {
+        width: 100%;
+        margin-right: 0; /* Remove margin for grid layout */
+      }
+    }
+
+    .header-container {
+      display: flex;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      justify-content: space-between; /* Keeps items on opposite ends on desktop */
+      align-items: center; /* Centers items vertically */
+      flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    }
+
+    .header-container h1 {
+      flex-grow: 1; /* Allows the h1 to take up any extra space */
+      text-align: left; /* Default alignment */
+      margin-bottom: 0; /* Removes bottom margin */
+    }
+
+    @media screen and (max-width: 639px) {
+      .header-container {
+        justify-content: center; /* Centers all items in the container on smaller screens */
+      }
+
+      .header-container h1 {
+        text-align: center; /* Centers the text of the h1 on smaller screens */
+      }
+
+      .view-all-button {
+        display: none; /* Optionally hide the button on smaller screens */
+      }
+    }
+
+    .view-all-button {
+      background: none;
+      margin-right: 3rem;
+      font-size: 0.75rem;
+      color: #000;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto py-8">
+    <div class="header-container">
+      <h1 class="text-3xl font-bold">Best Sellers</h1>
+      <a href="/collections/{{ section.settings.collection_handle }}" class="view-all-button">
+        Shop All Best Sellers →
+      </a>
+    </div>
+    <div id="product-container" class="product-container">
+      {% assign collection = collections[section.settings.collection_handle] %}
+      {% if collection.products.size > 0 %}
+        {% for product in collection.products limit: section.settings.products_to_show %}
+          <div class="product-item">
+            <div class="product-image">
+              <div class="best-seller-badge">Best Seller</div>
+              {% if product.tags contains 'discount' %}
+                <div class="discount-badge">15% Off</div>
+              {% endif %}
+              <img src="{{ product.featured_image | img_url: '500x500' }}" class="primary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
+              {% if product.images.size > 1 %}
+                <img src="{{ product.images[1] | img_url: '500x500' }}" class="secondary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
+              {% endif %}
+            </div>
+            <h2 class="text-lg font-semibold mt-4">{{ product.title }}</h2>
+            <p class="text-gray-600">{{ product.description | truncate: 100 }}</p>
+            <p class="text-yellow-500">★★★★☆</p>
+            <p class="text-gray-800 font-bold">{{ product.price | money }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No products found in this collection.</p>
+      {% endif %}
+    </div>
+
+    <div id="show-more-container" class="text-center mt-8">
+      <button id="show-more" class="bg-black text-white px-4 py-3 rounded-full w-11/12 md:w-5/6 md:mx-auto">Show More</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var productsToShow = {{ section.settings.products_to_show }};
+      var showMoreButton = document.getElementById('show-more');
+      var productContainer = document.getElementById('product-container');
+
+      function renderProducts() {
+        var products = Array.from(productContainer.getElementsByClassName('product-item'));
+        products.forEach(function (product, index) {
+          if (index < productsToShow) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+
+        if (productsToShow >= products.length) {
+          showMoreButton.style.display = 'none';
+        }
+      }
+
+      showMoreButton.addEventListener('click', function () {
+        productsToShow += {{ section.settings.products_to_show }};
+        renderProducts();
+      });
+
+      renderProducts();
+    });
+  </script>
+
+</body>
+</html>

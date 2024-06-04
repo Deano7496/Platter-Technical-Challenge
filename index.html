@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platter Best Sellers</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .product-image {
+      position: relative;
+    }
+
+    .product-image img.secondary {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-image:hover img.secondary {
+      opacity: 1;
+    }
+
+    .best-seller-badge {
+      position: absolute;
+      background-color: white;
+      color: black;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .discount-badge {
+      position: absolute;
+      background-color: green;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .best-seller-badge {
+      top: 0.5rem;
+      left: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .discount-badge {
+      top: 0.5rem;
+      right: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .product-container {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: auto;
+      gap: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    .product-container::-webkit-scrollbar {
+      height: 12px;
+    }
+
+    .product-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .product-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .product-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .product-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: calc(100% / 4);
+      margin-right: 1rem;
+    }
+
+    .product-item:last-child {
+      margin-right: 0;
+    }
+
+    .product-item img {
+      border-radius: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .product-container {
+        display: grid;
+        padding: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        overflow-x: hidden;
+      }
+
+      .product-item {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+
+    .header-container {
+      display: flex;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .header-container h1 {
+      flex-grow: 1;
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 639px) {
+      .header-container {
+        justify-content: center;
+      }
+
+      .header-container h1 {
+        text-align: center;
+      }
+
+      .view-all-button {
+        display: none;
+      }
+    }
+
+    .view-all-button {
+      background: none;
+      margin-right: 3rem;
+      font-size: 0.75rem;
+      color: #000;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+  <div class="container mx-auto py-8">
+    <div class="header-container">
+      <h1 class="text-3xl font-bold">Best Sellers</h1>
+      <button class="view-all-button">
+        Shop All Best Sellers →
+      </button>
+    </div>
+    <div id="product-container" class="product-container">
+      <!-- Product items will be injected here -->
+    </div>
+
+    <div id="show-more-container" class="text-center mt-8">
+      <button id="show-more" class="bg-black text-white px-4 py-3 rounded-full w-11/12 md:w-5/6 md:mx-auto">Show
+        More</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
