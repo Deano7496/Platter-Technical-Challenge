@@ -120,7 +120,7 @@ function renderProducts() {
           <img src="${product.image2}" class="secondary w-full h-48 object-cover rounded-lg" alt="${product.name}">
         </div>
         <h3 class="text-md font-semibold mt-4">${product.name}</h3>
-        <p class="text-black-500">${product.reviews} <span class="text-gray-600 italic text-sm">(1234 reviews)</span></p>
+        <p class="text-black-500">${product.reviews} <span class="text-gray-600 italic text-sm">(1234 Reviews)</span></p>
         <p class="text-gray-800">${product.price}</p>
       </div>
     `;
