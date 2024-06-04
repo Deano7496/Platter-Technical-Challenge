@@ -1,6 +1,6 @@
 # Platter Technical Challenge
 
-This project includes a Best Sellers section for a Shopify store. It displays a list of best-selling products with "Best Seller" and "15% Off" badges, and allows users to view all best sellers. The section is designed to be responsive and user-friendly.
+This project includes a Best Sellers section for a Shopify store. It displays a list of best-selling products with "Best Seller" and "Save 15%" badges, and allows users to view all best sellers. The section is designed to be responsive and user-friendly.
 
 ## Instructions
 

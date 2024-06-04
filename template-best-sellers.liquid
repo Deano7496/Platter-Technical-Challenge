@@ -195,7 +195,7 @@
             <div class="product-image">
               <div class="best-seller-badge">Best Seller</div>
               {% if product.tags contains 'discount' %}
-                <div class="discount-badge">15% Off</div>
+                <div class="discount-badge">Save 15%</div>
               {% endif %}
               <img src="{{ product.featured_image | img_url: '500x500' }}" class="primary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
               {% if product.images.size > 1 %}

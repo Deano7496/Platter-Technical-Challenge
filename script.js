@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    name: 'Product 1',
+    name: 'PRODUCT 1',
     description: 'This is product 1',
     price: '$29.99',
     reviews: '★★★★☆',
@@ -11,7 +11,7 @@ const products = [
   },
   {
     id: 2,
-    name: 'Product 2',
+    name: 'PRODUCT 2',
     description: 'This is product 2',
     price: '$39.99',
     reviews: '★★★★☆',
@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 3,
-    name: 'Product 3',
+    name: 'PRODUCT 3',
     description: 'This is product 3',
     price: '$49.99',
     reviews: '★★★★☆',
@@ -31,7 +31,7 @@ const products = [
   },
   {
     id: 4,
-    name: 'Product 4',
+    name: 'PRODUCT 4',
     description: 'This is product 4',
     price: '$59.99',
     reviews: '★★★★☆',
@@ -41,7 +41,7 @@ const products = [
   },
   {
     id: 5,
-    name: 'Product 5',
+    name: 'PRODUCT 5',
     description: 'This is product 5',
     price: '$69.99',
     reviews: '★★★★☆',
@@ -51,7 +51,7 @@ const products = [
   },
   {
     id: 6,
-    name: 'Product 6',
+    name: 'PRODUCT 6',
     description: 'This is product 6',
     price: '$79.99',
     reviews: '★★★★☆',
@@ -61,7 +61,7 @@ const products = [
   },
   {
     id: 7,
-    name: 'Product 7',
+    name: 'PRODUCT 7',
     description: 'This is product 7',
     price: '$89.99',
     reviews: '★★★★☆',
@@ -71,7 +71,7 @@ const products = [
   },
   {
     id: 8,
-    name: 'Product 8',
+    name: 'PRODUCT 8',
     description: 'This is product 8',
     price: '$99.99',
     reviews: '★★★★☆',
@@ -81,7 +81,7 @@ const products = [
   },
   {
     id: 9,
-    name: 'Product 9',
+    name: 'PRODUCT 9',
     description: 'This is product 9',
     price: '$109.99',
     reviews: '★★★★☆',
@@ -91,7 +91,7 @@ const products = [
   },
   {
     id: 10,
-    name: 'Product 10',
+    name: 'PRODUCT 10',
     description: 'This is product 10',
     price: '$119.99',
     reviews: '★★★★☆',
@@ -114,15 +114,14 @@ function renderProducts() {
     const productItem = `
       <div class="product-item">
         <div class="product-image">
-          <div class="best-seller-badge">Best Seller</div>
-          ${product.discount ? '<div class="discount-badge">15% Off</div>' : ''}
+          <div class="best-seller-badge">BEST SELLER</div>
+          ${product.discount ? '<div class="discount-badge">SAVE 15%</div>' : ''}
           <img src="${product.image1}" class="primary w-full h-48 object-cover rounded-lg" alt="${product.name}">
           <img src="${product.image2}" class="secondary w-full h-48 object-cover rounded-lg" alt="${product.name}">
         </div>
-        <h2 class="text-lg font-semibold mt-4">${product.name}</h2>
-        <p class="text-gray-600">${product.description}</p>
-        <p class="text-yellow-500">${product.reviews} <span class="text-gray-600 italic text-sm">(1234 reviews)</span></p>
-        <p class="text-gray-800 font-bold">${product.price}</p>
+        <h3 class="text-md font-semibold mt-4">${product.name}</h3>
+        <p class="text-black-500">${product.reviews} <span class="text-gray-600 italic text-sm">(1234 reviews)</span></p>
+        <p class="text-gray-800">${product.price}</p>
       </div>
     `;
     productContainer.innerHTML += productItem;

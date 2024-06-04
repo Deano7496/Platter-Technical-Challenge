@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Platter Best Sellers</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
   <style>
     .product-image {
       position: relative;
@@ -28,7 +32,7 @@
       background-color: white;
       color: black;
       padding: 0.2rem 0.5rem;
-      font-size: 0.75rem;
+      font-size: 0.55rem;
       font-weight: bold;
       z-index: 10;
     }
@@ -38,7 +42,7 @@
       background-color: green;
       color: white;
       padding: 0.2rem 0.5rem;
-      font-size: 0.75rem;
+      font-size: 0.55rem;
       font-weight: bold;
       z-index: 10;
     }
@@ -47,12 +51,14 @@
       top: 0.5rem;
       left: 0.5rem;
       border-radius: 0.5rem;
+      border: 1px solid black;
     }
 
     .discount-badge {
       top: 0.5rem;
       right: 0.5rem;
       border-radius: 0.5rem;
+      border: 1px solid black;
     }
 
     .product-container {
@@ -125,6 +131,8 @@
       flex-grow: 1;
       text-align: left;
       margin-bottom: 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
     }
 
     @media screen and (max-width: 639px) {
@@ -166,8 +174,9 @@
     </div>
 
     <div id="show-more-container" class="text-center mt-8">
-      <button id="show-more" class="bg-black text-white px-4 py-3 rounded-full w-11/12 md:w-5/6 md:mx-auto">Show
-        More</button>
+      <button id="show-more" class="bg-black text-white px-4 py-3 rounded-full w-11/12">
+        Show More
+      </button>
     </div>
   </div>
 
