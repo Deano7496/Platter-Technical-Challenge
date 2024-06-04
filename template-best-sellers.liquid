@@ -197,9 +197,9 @@
               {% if product.tags contains 'discount' %}
                 <div class="discount-badge">Save 15%</div>
               {% endif %}
-              <img src="{{ product.featured_image | img_url: '500x500' }}" class="primary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
+              <img src="{{ product.featured_image | image_url: '500x500' }}" width="500" height="500" class="primary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
               {% if product.images.size > 1 %}
-                <img src="{{ product.images[1] | img_url: '500x500' }}" class="secondary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
+                <img src="{{ product.images[1] | image_url: '500x500' }}" width="500" height="500" class="secondary w-full h-48 object-cover rounded-lg" alt="{{ product.title }}">
               {% endif %}
             </div>
             <h2 class="text-lg font-semibold mt-4">{{ product.title }}</h2>
